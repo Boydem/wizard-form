@@ -4,7 +4,8 @@ export interface Question {
     description: string;
     validationRule: ValidationRule;
     skipConditions?: SkipCondition[];
-    intialValue: string;
+    initialValue: string;
+    type: 'text' | 'number';
 }
 
 export type ValidationRule = (

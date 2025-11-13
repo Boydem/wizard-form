@@ -1,4 +1,4 @@
-import { Stack, Text, TextInput, Title } from "@mantine/core";
+import { NumberInput, Stack, Text, TextInput, Title } from "@mantine/core";
 import type { Question } from "../../types/question.type";
 
 interface WizardQuestionProps {
@@ -7,11 +7,12 @@ interface WizardQuestionProps {
 }
 
 export function WizardQuestion({ inputKey, question, ...props }: WizardQuestionProps) {
+    const Component = question.type === 'text' ? TextInput : NumberInput;
     return (
         <Stack gap="md">
             <Title>{question.title}</Title>
             <Text>{question.description}</Text>
-            <TextInput key={inputKey} label={question.title} description={question.description} {...props} />
+            <Component key={inputKey} label={question.title} description={question.description} {...props} />
         </Stack>
     )
 }
