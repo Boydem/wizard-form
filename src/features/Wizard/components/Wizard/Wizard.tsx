@@ -1,11 +1,11 @@
 import { Button, Group, Paper, Stack, Text } from "@mantine/core";
-import { WizardQuestion } from "../WizardQuestion/WizardQuestion";
 import { useMemo, useState } from "react";
 
 import type { Question } from "../../types/question.type";
 import { useForm } from "@mantine/form";
 import { buildValidationRules } from "../../utils/build-validation-rules";
 import { buildInitialValues } from "../../utils/build-initial-values";
+import { WizardQuestion } from "../WizardQuestion/WizardQuestion";
 
 interface WizardProps {
     questions: Question[];
@@ -54,7 +54,7 @@ export function Wizard({ questions, onSubmit }: WizardProps) {
         <Stack gap="lg" maw={'100%'} w={500}>
             <Paper withBorder p="md" radius="md" shadow="sm">
                 <Stack gap="lg">
-                    <WizardQuestion
+                    <WizardQuestion 
                         inputKey={form.key(currentQuestion.id)}
                         question={currentQuestion}
                         {...form.getInputProps(currentQuestion.id)}
