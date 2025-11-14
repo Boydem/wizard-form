@@ -20,4 +20,14 @@ export const validationRules = {
             ? message || 'Must be a number' 
             : null;
     },
+
+    // Must be a valid email
+    validEmail: (message?: string) => (value: any) => {
+        if (!value || value.length < 1) {
+            return 'This field is required';
+        }
+        return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+            ? message || 'Must be a valid email'
+            : null;
+    },
 }

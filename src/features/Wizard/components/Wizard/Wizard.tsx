@@ -47,19 +47,26 @@ export function Wizard({ questions, onSubmit }: WizardProps) {
         return <Text>No questions available</Text>
     }
 
-    return <Stack gap="md">
-        <Paper withBorder p="md" radius="md" shadow="sm">
-            <WizardQuestion
-                inputKey={form.key(currentQuestion.id)}
-                question={currentQuestion}
-                {...form.getInputProps(currentQuestion.id)}
-            />
-        </Paper>
-        <Group gap="md">
-            {currentQuestionIndex > 0 && <Button onClick={handlePrevious}>Previous</Button>}
-            <Button onClick={handleNext}>
-                {isLast ? 'Submit' : 'Next'}
-            </Button>
-        </Group>
-    </Stack>
+    return <form onSubmit={(e) => {
+        e.preventDefault();
+        handleNext();
+    }}>
+        <Stack gap="lg" maw={'100%'} w={500}>
+            <Paper withBorder p="md" radius="md" shadow="sm">
+                <Stack gap="lg">
+                    <WizardQuestion
+                        inputKey={form.key(currentQuestion.id)}
+                        question={currentQuestion}
+                        {...form.getInputProps(currentQuestion.id)}
+                    />
+                    <Group gap="md" w={'100%'} justify="space-between">
+                        <Button variant="light" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>Previous</Button>
+                        <Button type="submit">
+                            {isLast ? 'Submit' : 'Next'}
+                        </Button>
+                    </Group>
+                </Stack>
+            </Paper>
+        </Stack>
+    </form>
 }

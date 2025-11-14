@@ -1,5 +1,5 @@
 import type { Question } from "../types/question.type";
-import { validationRules } from "./validation-schemas";
+import { validationRules } from "./validation-rules";
 
 export const questions: Question[] = [
     {
@@ -14,9 +14,9 @@ export const questions: Question[] = [
         id: 'email',
         title: 'What is your email?',
         description: 'Please enter your email',
-        validationRule: validationRules.required('Email is required'),
+        validationRule: validationRules.validEmail(),
         initialValue: '',   
-        type: 'text',
+        type: 'email',
     },
     {
         id: 'age',
@@ -30,7 +30,7 @@ export const questions: Question[] = [
         id: 'university',
         title: 'What is your university?',
         description: 'Please enter your university',
-        validationRule: validationRules.required(),
+        validationRule: null, // optional field
         skipConditions: [
             (answers) => Number(answers.age) <= 18,
         ],

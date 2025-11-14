@@ -2,10 +2,10 @@ export interface Question {
     id: string;
     title: string;
     description: string;
-    validationRule: ValidationRule;
+    validationRule: ValidationRule | null;
     skipConditions?: SkipCondition[];
     initialValue: string;
-    type: 'text' | 'number';
+    type: 'text' | 'number' | 'email';
 }
 
 export type ValidationRule = (

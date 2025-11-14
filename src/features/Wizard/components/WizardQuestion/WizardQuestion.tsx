@@ -1,5 +1,6 @@
-import { NumberInput, Stack, Text, TextInput, Title } from "@mantine/core";
+import { NumberInput, TextInput } from "@mantine/core";
 import type { Question } from "../../types/question.type";
+import { useMemo } from "react";
 
 interface WizardQuestionProps {
     inputKey: string;
@@ -7,12 +8,24 @@ interface WizardQuestionProps {
 }
 
 export function WizardQuestion({ inputKey, question, ...props }: WizardQuestionProps) {
-    const Component = question.type === 'text' ? TextInput : NumberInput;
-    return (
-        <Stack gap="md">
-            <Title>{question.title}</Title>
-            <Text>{question.description}</Text>
-            <Component key={inputKey} label={question.title} description={question.description} {...props} />
-        </Stack>
-    )
+    const componentProps = useMemo(() => {
+        return {
+            ...props,
+            label: question.title,
+            description: question.description,
+            withAsterisk: !!question.validationRule,
+            type: question.type === 'email' ? 'email' : 'text',
+        }
+    }, [question, props]);
+
+    switch (question.type) {
+        case 'text':
+        case 'email':
+            return <TextInput key={inputKey} {...componentProps} />;
+        case 'number':
+            return <NumberInput key={inputKey} {...componentProps} type="tel" />;
+        default:
+            console.warn(`Unsupported question type: ${question.type}`);
+            return <TextInput key={inputKey} {...componentProps} />;
+    }
 }
