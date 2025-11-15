@@ -24,6 +24,36 @@ npm run dev
 npm run build
 ```
 
+## 🐳 Docker
+
+Build and run the app in a Docker container with nginx:
+
+```bash
+# Build the Docker image
+docker build -t wizard-app .
+
+# Run the container
+docker run -d -p 8080:80 --name wizard-container wizard-app
+
+# Access the app at http://localhost:8080
+```
+
+**Manage the container:**
+
+```bash
+# Stop the container
+docker stop wizard-container
+
+# Start the container
+docker start wizard-container
+
+# View logs
+docker logs wizard-container
+
+# Remove the container
+docker rm wizard-container
+```
+
 ## 📁 Project Structure
 
 ```
